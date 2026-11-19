@@ -117,10 +117,12 @@ switch (rotation) {
             writedata(TFT_MAD_MX | TFT_MAD_MV | TFT_MAD_BGR);
             colstart = 1;
             rowstart = 26;
-        } else if (tabcolor == INITR_REDTAB160x80) {
-            writedata(TFT_MAD_MX | TFT_MAD_MV | TFT_MAD_BGR);
-            colstart = 0;
-            rowstart = 24;
+        } else if(tabcolor == INITR_REDTAB160x80) {
+        writedata(TFT_MAD_MX | TFT_MAD_MV | TFT_MAD_COLOR_ORDER);
+        colstart = 0;
+        rowstart = 23;
+        }
+    
         } else if (tabcolor == INITB) {
             writedata(TFT_MAD_MV | TFT_MAD_RGB);
         } else {
