@@ -115,26 +115,30 @@ void _setup_gpio() {
 void _post_setup_gpio() {
     tft.invertDisplay(false);   // Keep normal colors
 
+    // Cast to base TFT_eSPI to bypass private inheritance in tft_display
+    TFT_eSPI *rawTft = (TFT_eSPI *)&tft;
+
     // Wipe entire physical ST7735S GRAM (0..161 x 0..161) to pure black to erase top/left edge static
-    tft.startWrite();
-    tft.writecommand(0x2A); // CASET: columns 0..161
-    tft.writedata(0x00); tft.writedata(0x00);
-    tft.writedata(0x00); tft.writedata(161);
-    tft.writecommand(0x2B); // RASET: rows 0..161
-    tft.writedata(0x00); tft.writedata(0x00);
-    tft.writedata(0x00); tft.writedata(161);
-    tft.writecommand(0x2C); // RAMWR: fill every hardware RAM pixel with black (0x0000)
+    rawTft->startWrite();
+    rawTft->writecommand(0x2A); // CASET: columns 0..161
+    rawTft->writedata(0x00); rawTft->writedata(0x00);
+    rawTft->writedata(0x00); rawTft->writedata(161);
+    rawTft->writecommand(0x2B); // RASET: rows 0..161
+    rawTft->writedata(0x00); rawTft->writedata(0x00);
+    rawTft->writedata(0x00); rawTft->writedata(161);
+    rawTft->writecommand(0x2C); // RAMWR: fill every hardware RAM pixel with black (0x0000)
     for (uint32_t i = 0; i < (162UL * 162UL); i++) {
-        tft.writedata(0x00);
-        tft.writedata(0x00);
+        rawTft->writedata(0x00);
+        rawTft->writedata(0x00);
     }
-    tft.endWrite();
+    rawTft->endWrite();
 
     tft.fillScreen(TFT_BLACK);
     // Backlight control via PWM (must be after TFT init)
     hal_bright_attach(TFT_BL);
     hal_bright_set(TFT_BL, 100); // Full brightness initially
 }
+
 
 /*********************************************************************
 ** Function: setBrightness
