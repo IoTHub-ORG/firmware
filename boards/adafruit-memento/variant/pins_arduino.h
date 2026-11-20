@@ -5,6 +5,13 @@
 
 #define USB_VID 0x239A
 #define USB_PID 0x8149
+// Route main I2C bus to MEMENTO's AW9523 expander pins
+#define GROVE_SDA 34
+#define GROVE_SCL 33
+
+// Enable 5-way navigation (Up, Down, Left, Right, OK)
+#define HAS_5_BUTTONS
+#define BTN_ALIAS "\"OK\""
 
 static const uint8_t TX = 43;
 static const uint8_t RX = 44;
