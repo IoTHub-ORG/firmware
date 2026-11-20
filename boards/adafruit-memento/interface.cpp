@@ -43,7 +43,6 @@ void _setup_gpio() {
     bruceConfigPins.buzzer     = 46;
     bruceConfigPins.i2c_bus    = {(gpio_num_t)MEMENTO_SDA, (gpio_num_t)MEMENTO_SCL};
     bruceConfigPins.sys_i2c    = {(gpio_num_t)MEMENTO_SDA, (gpio_num_t)MEMENTO_SCL};
-    bruceConfigPins.spi_bus    = {(gpio_num_t)36, (gpio_num_t)37, (gpio_num_t)35, (gpio_num_t)48};
     bruceConfigPins.SDCARD_bus = {(gpio_num_t)36, (gpio_num_t)37, (gpio_num_t)35, (gpio_num_t)48};
     bruceConfigPins.irTx       = 17; // JST-PH A0
     bruceConfigPins.irRx       = 18; // JST-PH A1
