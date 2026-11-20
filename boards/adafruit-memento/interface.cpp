@@ -5,6 +5,20 @@
 #include <SPI.h>
 #include <Wire.h>
 #include <interface.h>
+#include <Wire.h>
+#include <Adafruit_AW9523.h>
+
+Adafruit_AW9523 aw;
+
+// AW9523 Expander Button Pins on Adafruit MEMENTO
+#define BTN_OK      11
+#define BTN_SELECT  1
+#define BTN_UP      13
+#define BTN_DOWN    15
+#define BTN_LEFT    14
+#define BTN_RIGHT   12
+#define BTN_SHUTTER 0   // Direct ESP32-S3 "Cheese!" button
+
 
 #define AW9523_ADDR      0x58
 #define AW9523_REG_IN0   0x00
