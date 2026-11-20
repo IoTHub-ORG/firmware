@@ -34,7 +34,8 @@ jobs:
       fail-fast: false
       matrix:
         board:
-          - { env: "m5stack-cplus2",                  family: "ESP32",}
+      
+        - { env: "adafruit-memento", family: "ESP32-S3",}
 
     steps:
       - uses: actions/checkout@v4
