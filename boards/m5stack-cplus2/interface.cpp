@@ -113,9 +113,26 @@ void _setup_gpio() {
 ** Description:   second stage gpio setup after TFT is initialized
 ***************************************************************************************/
 void _post_setup_gpio() {
-    tft.invertDisplay(false);    // Keep normal colors
+    tft.invertDisplay(false);
+
+    TFT_eSPI *rawTft = (TFT_eSPI *)&tft;
+    rawTft->startWrite();
+    rawTft->writecommand(0x2A);
+    rawTft->writedata(0x00); rawTft->writedata(0x00);
+    rawTft->writedata(0x00); rawTft->writedata(161);
+    rawTft->writecommand(0x2B);
+    rawTft->writedata(0x00); rawTft->writedata(0x00);
+    rawTft->writedata(0x00); rawTft->writedata(161);
+    rawTft->writecommand(0x2C);
+    for (uint32_t i = 0; i < (162UL * 162UL); i++) {
+        rawTft->writedata(0x00);
+        rawTft->writedata(0x00);
+    }
+    rawTft->endWrite();
+
+    tft.fillScreen(TFT_BLACK);
     hal_bright_attach(TFT_BL);
-    hal_bright_set(TFT_BL, 100); // Full brightness initially
+    hal_bright_set(TFT_BL, 100);
 }
 
 /*********************************************************************
